@@ -4,13 +4,13 @@ const byte pps_pin = 8;
 const byte msg_pin = 9;
 const byte rx_pin = 10;
 const byte tx_pin = 11;
-const bool inverse_logic = true;
+const bool inverse_logic = false;
 SoftwareSerial gprmc_conn(rx_pin, tx_pin, inverse_logic);
 
 const unsigned int trigger_freq = 1;
 const unsigned long dt = 1000000 / trigger_freq; // => dt = 1 sec
 const unsigned long dt_pps_pull_low = dt + 100000; // => dt + 100ms
-const unsigned long dt_sent_gprmc = dt_pps_pull_low + 250000; // => dt_pps_pull_low + 100ms
+const unsigned long dt_sent_gprmc = dt_pps_pull_low + 250000; // => dt_pps_pull_low + 250ms
 unsigned long timestamp;
 unsigned long trigger_start_time;
 unsigned long ts_pps_high;
@@ -45,7 +45,9 @@ void loop() {
   timestamp = micros() - trigger_start_time;
   if (timestamp >= dt*i + dt_sent_gprmc)
   {
-    digitalWrite(msg_pin, HIGH);
+    // digitalWrite(msg_pin, HIGH);
+    // ts_msg_high = micros();
+    
     i += 1;
     if (ss == 59)
     {
@@ -59,7 +61,6 @@ void loop() {
     }
     else ss += 1;
 
-    ts_msg_high = micros();
 
     // Prepare GPRMC msg
     sprintf(buffer, "GPRMC,%02d%02d%02d,A,%s,N,%s,E,022.4,084.4,070423,,A", hh, mm, ss, pos_latitude, pos_longitude);
@@ -75,8 +76,8 @@ void loop() {
     gprmc_conn.print(CRC, HEX);
     gprmc_conn.println();
   
-    digitalWrite(msg_pin, LOW);
-    ts_msg_low = micros();
+    // digitalWrite(msg_pin, LOW);
+    // ts_msg_low = micros();
 
 #if 0
     // Print Debug Messages
