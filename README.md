@@ -40,3 +40,8 @@ If the `gps_time` parameter is set, then you will see the time jump after time s
 You can enable the debug messages in Arduino code to monitor the GPRMC.
 
 ![](resource/arduino_serial_monitor.png)
+
+## Note
+
+If Arduino is connected to other device and the UART data is not readable, please consider to change the `inverse_logic` to `false`.
+https://github.com/Adlink-ROS/arduino_pps_gprmc_time_sync/blob/46b20be58a1bf732323bd96396a94d01cb6a8e1c/src/pps_gprmc_time_sync/pps_gprmc_time_sync.ino#L7
