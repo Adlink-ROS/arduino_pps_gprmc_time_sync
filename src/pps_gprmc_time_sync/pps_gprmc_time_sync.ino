@@ -4,7 +4,7 @@ const byte pps_pin = 8;
 const byte msg_pin = 9;
 const byte rx_pin = 10;
 const byte tx_pin = 11;
-const bool inverse_logic = false;
+const bool inverse_logic = true;
 SoftwareSerial gprmc_conn(rx_pin, tx_pin, inverse_logic);
 
 const unsigned int trigger_freq = 1;
