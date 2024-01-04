@@ -9,11 +9,11 @@ Use Arduino Uno to simulate a GPS module, sending PPS pulse and GPRMC message to
 
 ## Wiring Connection
 
-|  VLP-16   | Arduino  |
-|  ----  | ----  |
-| Ground  | GND |
-| GPS PULSE  | Pin#8 |
-| GPS RECEIVE  | Pin#11 |
+|  VLP-16   | Arduino  | Description |
+|  ----  | ----  | ---- |
+| Ground  | GND |  |
+| GPS PULSE  | Pin#8 | PPS_OUT |
+| GPS RECEIVE  | Pin#11 | GPRMC_TX |
 
 ## VLP-16 Configuraition
 
